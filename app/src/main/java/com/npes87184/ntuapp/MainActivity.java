@@ -1,6 +1,7 @@
 package com.npes87184.ntuapp;
 
 import android.app.Activity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -14,9 +15,16 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
+import com.roomorama.caldroid.CaldroidFragment;
+import com.roomorama.caldroid.CaldroidListener;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class MainActivity extends ActionBarActivity
@@ -47,6 +55,8 @@ public class MainActivity extends ActionBarActivity
 
         new DataFetch().execute(DataType.Notification);
 
+        Nights.getInstance().init(this);
+
         try {
             Thread.sleep(1000);
         } catch (Exception e) {
@@ -57,10 +67,63 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
+        if(0==position) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                    .commit();
+        } else {
+            CaldroidFragment caldroidFragment = new CaldroidFragment();
+            Bundle args = new Bundle();
+            Calendar cal = Calendar.getInstance();
+            args.putInt(CaldroidFragment.MONTH, cal.get(Calendar.MONTH) + 1);
+            args.putInt(CaldroidFragment.YEAR, cal.get(Calendar.YEAR));
+            caldroidFragment.setArguments(args);
+            final SimpleDateFormat dayFormatter = new SimpleDateFormat("dd");
+            final SimpleDateFormat MMFormatter = new SimpleDateFormat("MM");
+
+            final CaldroidListener listener = new CaldroidListener() {
+
+                @Override
+                public void onSelectDate(Date date, View view) {
+                    int day = Integer.parseInt(dayFormatter.format(date));
+                    int mm = Integer.parseInt(MMFormatter.format(date));
+                    if(!Nights.getInstance().getNights(mm, day).equals("0")) {
+                        Toast.makeText(getApplicationContext(), Nights.getInstance().getNights(mm, day),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onChangeMonth(int month, int year) {
+                 /*   String text = "month: " + month + " year: " + year;
+                    Toast.makeText(getApplicationContext(), text,
+                            Toast.LENGTH_SHORT).show();*/
+                }
+
+                @Override
+                public void onLongClickDate(Date date, View view) {
+                /*    Toast.makeText(getApplicationContext(),
+                            "Long click " + MMFormatter.format(date),
+                            Toast.LENGTH_SHORT).show();*/
+                }
+
+                @Override
+                public void onCaldroidViewCreated() {
+                 /*   Toast.makeText(getApplicationContext(),
+                            "Caldroid view is created",
+                            Toast.LENGTH_SHORT).show();*/
+                }
+
+            };
+
+            caldroidFragment.setCaldroidListener(listener);
+
+
+            FragmentTransaction t = getSupportFragmentManager().beginTransaction();
+            t.replace(R.id.container, caldroidFragment);
+            t.commit();
+        }
     }
 
     public void onSectionAttached(int number) {
@@ -141,27 +204,21 @@ public class MainActivity extends ActionBarActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            View rootView;
+
+            rootView = inflater.inflate(R.layout.fragment_main, container, false);
             ListView listview = (ListView)rootView.findViewById(R.id.listView);
-            if(getArguments().getInt(ARG_SECTION_NUMBER)==1) {
-                ArrayList<String> arr = new ArrayList<String>(3);
+            ArrayList<String> arr = new ArrayList<String>(3);
 
-                for(int i=0;i<DataClass.getInstance().notifi.size();i++) {
-                    arr.add(DataClass.getInstance().notifi.get(i));
-                }
-
-                ArrayAdapter<String> adapter =
-                        new ArrayAdapter<String>(getActivity(),
-                                android.R.layout.simple_list_item_1,arr);
-                listview.setAdapter(adapter);
-            } else {
-                ArrayList<String> arr = new ArrayList<String>(3);
-                arr.add("2");
-                ArrayAdapter<String> adapter =
-                        new ArrayAdapter<String>(getActivity(),
-                                android.R.layout.simple_list_item_1,arr);
-                listview.setAdapter(adapter);
+            for(int i=0;i<DataClass.getInstance().notifi.size();i++) {
+                arr.add(DataClass.getInstance().notifi.get(i));
             }
+
+            ArrayAdapter<String> adapter =
+                    new ArrayAdapter<String>(getActivity(),
+                            android.R.layout.simple_list_item_1,arr);
+            listview.setAdapter(adapter);
+
             return rootView;
         }
 

@@ -11,7 +11,7 @@ import org.jsoup.select.Elements;
  */
 
 enum DataType {
-    Notification, News
+    Notification
 }
 
 public class DataFetch extends AsyncTask<DataType, Void, Boolean> {
@@ -20,11 +20,8 @@ public class DataFetch extends AsyncTask<DataType, Void, Boolean> {
     protected Boolean doInBackground(DataType[] parms) {
 
         // clear old data
-        if(parms[0] == DataType.Notification) {
-            DataClass.getInstance().notifi.clear();
-        } else {
-            DataClass.getInstance().news.clear();
-        }
+        DataClass.getInstance().notifi.clear();
+
 
         try {
             Document doc = Jsoup.connect("http://www.ntu.edu.tw/").get();
@@ -32,11 +29,7 @@ public class DataFetch extends AsyncTask<DataType, Void, Boolean> {
             Elements aTags = tableTags.select("a");
 
             for (int i = 0; i < aTags.size(); i++) {
-                if(parms[0] == DataType.Notification) {
-                    DataClass.getInstance().notifi.add(aTags.get(i).text());
-                } else {
-                    DataClass.getInstance().news.add(aTags.get(i+1).text());
-                }
+                DataClass.getInstance().notifi.add(aTags.get(i).text());
             }
 
         } catch(Exception e) {
