@@ -17,7 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
@@ -54,26 +53,31 @@ public class MainActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
+
         new DataFetch().execute(DataType.Notification);
 
         Nights.getInstance().init(this);
-
-        try {
-            Thread.sleep(1000);
-        } catch (Exception e) {
-
-        }
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         if(0==position) {
+            mTitle = getString(R.string.title_section1);
+            restoreActionBar();
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, HomeFragment.newInstance(position + 1))
+                    .commit();
+        } else if(1==position) {
+            mTitle = getString(R.string.title_section2);
+            restoreActionBar();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                     .commit();
-        } else {
+        } else if(2==position) {
             mTitle = getString(R.string.title_section3);
             restoreActionBar();
 
@@ -116,10 +120,12 @@ public class MainActivity extends ActionBarActivity
 
             caldroidFragment.setCaldroidListener(listener);
 
-
             FragmentTransaction t = getSupportFragmentManager().beginTransaction();
             t.replace(R.id.container, caldroidFragment);
             t.commit();
+        } else if(3==position) {
+            mTitle = getString(R.string.title_section4);
+            restoreActionBar();
         }
     }
 
@@ -143,7 +149,6 @@ public class MainActivity extends ActionBarActivity
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

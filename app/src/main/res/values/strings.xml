@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">NTU APP</string>
 
-    <string name="title_section1">Notification</string>
-    <string name="title_section2">Calendar</string>
-    <string name="title_section3">Nights</string>
+    <string name="title_section1">Home</string>
+    <string name="title_section2">Notification</string>
+    <string name="title_section3">Calendar</string>
+    <string name="title_section4">Nights</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
