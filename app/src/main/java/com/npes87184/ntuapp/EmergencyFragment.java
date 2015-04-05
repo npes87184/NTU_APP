@@ -54,10 +54,12 @@ public class EmergencyFragment extends Fragment {
 
             @Override
             public void onItemClick(CardItemView view, int position) {
-                String uri = "tel:" + view.getTag().toString().trim() ;
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse(uri));
-                startActivity(intent);
+                if(!view.getTag().toString().equals("0")) {
+                    String uri = "tel:" + view.getTag().toString().trim();
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse(uri));
+                    startActivity(intent);
+                }
             }
 
             @Override
@@ -65,6 +67,13 @@ public class EmergencyFragment extends Fragment {
 
             }
         });
+
+        SmallImageCard card0 = new SmallImageCard(getActivity());
+        card0.setDescription(getString(R.string.information_detail));
+        //card1.setDrawable(R.drawable.law);
+        card0.setTitle(getString(R.string.information));
+        card0.setTag("0");
+        mListView.add(card0);
 
         SmallImageCard card1 = new SmallImageCard(getActivity());
         card1.setDescription("(02)3366-2054~60 \n (02)3366-9119");

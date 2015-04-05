@@ -29,6 +29,8 @@
     <string name="subject">NTU APP</string>
     <string name="mail_body">My problem is:\nMy phone is: \nMy android version is:\nother:</string>
 
+    <string name="information">Information</string>
+    <string name="information_detail">You can directly click the card to open dialer and call.</string>
     <string name="student_Safety_Division">Student Safety Division</string>
     <string name="campus_Security">Campus Security</string>
     <string name="hospital">Hospital</string>
