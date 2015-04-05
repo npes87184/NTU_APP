@@ -70,7 +70,7 @@ public class AboutFragment extends Fragment {
 
             @Override
             public void onItemLongClick(CardItemView view, int position) {
-                Log.i("LONG_CLICK", view.getTag().toString());
+
             }
         });
 

@@ -29,4 +29,18 @@
     <string name="subject">NTU APP</string>
     <string name="mail_body">My problem is:\nMy phone is: \nMy android version is:\nother:</string>
 
+    <string name="student_Safety_Division">Student Safety Division</string>
+    <string name="campus_Security">Campus Security</string>
+    <string name="hospital">Hospital</string>
+    <string name="student_Affairs">Student Affairs</string>
+    <string name="NTU_Hospital">NTU Hospital</string>
+    <string name="TSGH_Hospital">Tri-Service General Hospital, Ding-Zhou Branch</string>
+    <string name="TC_Hospital">Taipei City Hospital,Ren-Ai Branch</string>
+    <string name="TC_Hospital_He_Ping">Taipei City Hospital,He-Ping Branch</string>
+    <string name="Health_Center">Health Center</string>
+    <string name="Student_Assistance_Division">Student Assistance Division</string>
+    <string name="Student_Housing_Service_Division">Student Housing Service Division</string>
+    <string name="Student_Activity_Division">Student Activity Division</string>
+    <string name="Student_Counseling_Center">Student Counseling Center</string>
+
 </resources>

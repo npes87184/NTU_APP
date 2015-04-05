@@ -131,6 +131,11 @@ public class MainActivity extends ActionBarActivity
         } else if(4==position) {
             mTitle = getString(R.string.title_section5);
             restoreActionBar();
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, EmergencyFragment.newInstance(position + 1))
+                    .commit();
         } else if(5==position) {
             mTitle = getString(R.string.title_section6);
             restoreActionBar();
