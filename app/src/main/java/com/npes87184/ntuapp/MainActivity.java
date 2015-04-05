@@ -57,6 +57,7 @@ public class MainActivity extends ActionBarActivity
         new DataFetch().execute(DataType.Notification);
 
         Nights.getInstance().init(this);
+        Calendars.getInstance().init(this);
     }
 
     @Override
@@ -81,8 +82,61 @@ public class MainActivity extends ActionBarActivity
             mTitle = getString(R.string.title_section3);
             restoreActionBar();
 
+            CaldroidFragment caldroidFragment = new CaldroidFragment();
+            Bundle args = new Bundle();
+            Calendar cal = Calendar.getInstance();
+            args.putInt(CaldroidFragment.MONTH, cal.get(Calendar.MONTH) + 1);
+            args.putInt(CaldroidFragment.YEAR, cal.get(Calendar.YEAR));
+            caldroidFragment.setArguments(args);
+            final SimpleDateFormat dayFormatter = new SimpleDateFormat("dd");
+            final SimpleDateFormat MMFormatter = new SimpleDateFormat("MM");
+            final SimpleDateFormat backgroundFormatter = new SimpleDateFormat("yyyy MM dd");
+
+            // let the date of weekend be red
+            for(int mm=1;mm<13;mm++) {
+                for(int day=1;day<31;day++) {
+                    try {
+                        String target = "2015 " + String.valueOf(mm) + " " + String.valueOf(day);
+                        Date redDate = backgroundFormatter.parse(target);
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTime(redDate);
+                        int weekday = calendar.get(Calendar.DAY_OF_WEEK);
+                        if(weekday==7 || weekday==1) {
+                            caldroidFragment.setTextColorForDate(R.color.red, redDate);
+                        }
+                        if(!Calendars.getInstance().getEvents(mm, day).equals("0")) {
+                            if(Calendars.getInstance().getType(mm, day).equals("假")) {
+                                caldroidFragment.setTextColorForDate(R.color.red, redDate);
+                            } else {
+                                caldroidFragment.setTextColorForDate(R.color.green, redDate);
+                            }
+                        }
+                    } catch (ParseException e) {
+
+                    }
+                }
+            }
+
+            final CaldroidListener listener = new CaldroidListener() {
+                @Override
+                public void onSelectDate(Date date, View view) {
+                    int day = Integer.parseInt(dayFormatter.format(date));
+                    int mm = Integer.parseInt(MMFormatter.format(date));
+                    if(!Calendars.getInstance().getEvents(mm, day).equals("0")) {
+                        Toast.makeText(getApplicationContext(), Calendars.getInstance().getEvents(mm, day),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+            };
+
+            caldroidFragment.setCaldroidListener(listener);
+
+            FragmentTransaction t = getSupportFragmentManager().beginTransaction();
+            t.replace(R.id.container, caldroidFragment);
+            t.commit();
 
         } else if(3==position) {
+            //nights
             mTitle = getString(R.string.title_section4);
             restoreActionBar();
 
@@ -96,7 +150,7 @@ public class MainActivity extends ActionBarActivity
             final SimpleDateFormat MMFormatter = new SimpleDateFormat("MM");
             final SimpleDateFormat backgroundFormatter = new SimpleDateFormat("yyyy MM dd");
 
-            // let the date of night be purple
+            // let the date of night be red
             for(int mm=1;mm<13;mm++) {
                 for(int day=1;day<31;day++) {
                     if(!Nights.getInstance().getNights(mm, day).equals("0")) {
@@ -129,6 +183,7 @@ public class MainActivity extends ActionBarActivity
             t.replace(R.id.container, caldroidFragment);
             t.commit();
         } else if(4==position) {
+            //emergency
             mTitle = getString(R.string.title_section5);
             restoreActionBar();
 
@@ -137,6 +192,7 @@ public class MainActivity extends ActionBarActivity
                     .replace(R.id.container, EmergencyFragment.newInstance(position + 1))
                     .commit();
         } else if(5==position) {
+            //About
             mTitle = getString(R.string.title_section6);
             restoreActionBar();
 
