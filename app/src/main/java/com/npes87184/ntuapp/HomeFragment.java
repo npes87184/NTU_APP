@@ -61,7 +61,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
 
         int day = Integer.parseInt(dayFormatter.format(current));
         int mm = Integer.parseInt(MMFormatter.format(current));
-        int hh = Integer.parseInt(HHFormatter.format(current));
+        int hh = Integer.parseInt(HHFormatter.format(current))+8;
 
         SmallImageCard today = new SmallImageCard(getActivity());
         if(hh<=12) {
@@ -71,6 +71,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
         } else {
             today.setDescription(getResources().getString(R.string.today_detail)+" " + getResources().getString(R.string.evening) +" "+ String.valueOf(mm) + "/" + String.valueOf(day));
         }
+        today.setDrawable(R.drawable.sun);
         today.setTitle(getResources().getString(R.string.today));
         today.setTag(CardType.Today);
         mListView.add(today);
@@ -78,6 +79,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
         SmallImageCard positive_energy = new SmallImageCard(getActivity());
         positive_energy.setDismissible(true);
         positive_energy.setDescription(PositiveEnergy.getInstance().getPositiveEnergy(mm, day));
+        positive_energy.setDrawable(R.drawable.lucky);
         positive_energy.setTitle(getResources().getString(R.string.positive_energy));
         positive_energy.setTag(CardType.Positive_Energy);
         mListView.add(positive_energy);
@@ -86,6 +88,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
             SmallImageCard activity = new SmallImageCard(getActivity());
             activity.setDismissible(true);
             activity.setDescription(Nights.getInstance().getNights(mm, day));
+            activity.setDrawable(R.drawable.run);
             activity.setTitle(getResources().getString(R.string.activity));
             activity.setTag(CardType.Activity);
             mListView.add(activity);

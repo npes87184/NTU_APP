@@ -81,6 +81,11 @@ public class MainActivity extends ActionBarActivity
             mTitle = getString(R.string.title_section3);
             restoreActionBar();
 
+
+        } else if(3==position) {
+            mTitle = getString(R.string.title_section4);
+            restoreActionBar();
+
             CaldroidFragment caldroidFragment = new CaldroidFragment();
             Bundle args = new Bundle();
             Calendar cal = Calendar.getInstance();
@@ -123,9 +128,6 @@ public class MainActivity extends ActionBarActivity
             FragmentTransaction t = getSupportFragmentManager().beginTransaction();
             t.replace(R.id.container, caldroidFragment);
             t.commit();
-        } else if(3==position) {
-            mTitle = getString(R.string.title_section4);
-            restoreActionBar();
         }
     }
 
