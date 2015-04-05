@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -73,6 +74,9 @@ public class MainActivity extends ActionBarActivity
                     .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                     .commit();
         } else {
+            mTitle = getString(R.string.title_section3);
+            restoreActionBar();
+
             CaldroidFragment caldroidFragment = new CaldroidFragment();
             Bundle args = new Bundle();
             Calendar cal = Calendar.getInstance();
@@ -81,9 +85,24 @@ public class MainActivity extends ActionBarActivity
             caldroidFragment.setArguments(args);
             final SimpleDateFormat dayFormatter = new SimpleDateFormat("dd");
             final SimpleDateFormat MMFormatter = new SimpleDateFormat("MM");
+            final SimpleDateFormat backgroundFormatter = new SimpleDateFormat("yyyy MM dd");
+
+            // let the date of night be purple
+            for(int mm=1;mm<13;mm++) {
+                for(int day=1;day<31;day++) {
+                    if(!Nights.getInstance().getNights(mm, day).equals("0")) {
+                        try {
+                            String target = "2015 " + String.valueOf(mm) + " " + String.valueOf(day);
+                            Date purpleDate = backgroundFormatter.parse(target);
+                            caldroidFragment.setTextColorForDate(R.color.red, purpleDate);
+                        } catch (ParseException e) {
+
+                        }
+                    }
+                }
+            }
 
             final CaldroidListener listener = new CaldroidListener() {
-
                 @Override
                 public void onSelectDate(Date date, View view) {
                     int day = Integer.parseInt(dayFormatter.format(date));
@@ -93,28 +112,6 @@ public class MainActivity extends ActionBarActivity
                                 Toast.LENGTH_SHORT).show();
                     }
                 }
-
-                @Override
-                public void onChangeMonth(int month, int year) {
-                 /*   String text = "month: " + month + " year: " + year;
-                    Toast.makeText(getApplicationContext(), text,
-                            Toast.LENGTH_SHORT).show();*/
-                }
-
-                @Override
-                public void onLongClickDate(Date date, View view) {
-                /*    Toast.makeText(getApplicationContext(),
-                            "Long click " + MMFormatter.format(date),
-                            Toast.LENGTH_SHORT).show();*/
-                }
-
-                @Override
-                public void onCaldroidViewCreated() {
-                 /*   Toast.makeText(getApplicationContext(),
-                            "Caldroid view is created",
-                            Toast.LENGTH_SHORT).show();*/
-                }
-
             };
 
             caldroidFragment.setCaldroidListener(listener);
