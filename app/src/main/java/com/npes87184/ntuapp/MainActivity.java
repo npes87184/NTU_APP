@@ -128,7 +128,19 @@ public class MainActivity extends ActionBarActivity
             FragmentTransaction t = getSupportFragmentManager().beginTransaction();
             t.replace(R.id.container, caldroidFragment);
             t.commit();
+        } else if(4==position) {
+            mTitle = getString(R.string.title_section5);
+            restoreActionBar();
+        } else if(5==position) {
+            mTitle = getString(R.string.title_section6);
+            restoreActionBar();
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, AboutFragment.newInstance(position + 1))
+                    .commit();
         }
+
     }
 
     public void onSectionAttached(int number) {
