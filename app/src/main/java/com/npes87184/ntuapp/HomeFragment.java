@@ -12,7 +12,6 @@ import com.dexafree.materialList.view.MaterialListView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.CancellationException;
 
 /**
  * Created by npes87184 on 2015/4/5.
@@ -61,7 +60,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
 
         int day = Integer.parseInt(dayFormatter.format(current));
         int mm = Integer.parseInt(MMFormatter.format(current));
-        int hh = Integer.parseInt(HHFormatter.format(current))+8;
+        int hh = Integer.parseInt(HHFormatter.format(current));
 
         SmallImageCard today = new SmallImageCard(getActivity());
         if(hh<=12) {
