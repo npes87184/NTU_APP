@@ -18,10 +18,10 @@
     <string name="positive_energy">Positive Energy</string>
     <string name="activity">Activity</string>
     <string name="today">Today</string>
-    <string name="today_detail">Hello! Good</string>
-    <string name="morning">Morning Today is: </string>
-    <string name="afternoon">Afternoon Today is: </string>
-    <string name="evening">Evening Today is: </string>
+    <string name="today_detail">Hello!</string>
+    <string name="morning">Good Morning Today is: </string>
+    <string name="afternoon">Good Afternoon Today is: </string>
+    <string name="evening">Good Evening Today is: </string>
     <string name="claim_detail">All images are collected from Internet. If there is any tort, please inform immediately.</string>
     <string name="claim">Claim</string>
     <string name="contact_detail">If you find any problem, welcome to contact me! Note: You can click this card to send me a e-mail.</string>
