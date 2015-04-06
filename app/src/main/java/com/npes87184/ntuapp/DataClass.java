@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class DataClass {
     private static  DataClass mDataClass;
     public ArrayList<String> notifi = new ArrayList<String>(3);
+    public ArrayList<String> link = new ArrayList<String>(3);
 
     private DataClass() {
 

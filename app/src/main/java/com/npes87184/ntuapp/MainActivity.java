@@ -3,6 +3,8 @@ package com.npes87184.ntuapp;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -15,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -310,8 +313,18 @@ public class MainActivity extends ActionBarActivity
                     new ArrayAdapter<String>(getActivity(),
                             android.R.layout.simple_list_item_1,arr);
             listview.setAdapter(adapter);
+            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView arg0, View arg1, int arg2,long arg3) {
+                    String url = DataClass.getInstance().link.get(arg2);
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                }
+             });
 
-            return rootView;
+
+                return rootView;
         }
 
         @Override

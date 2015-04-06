@@ -30,6 +30,7 @@ public class DataFetch extends AsyncTask<DataType, Void, Boolean> {
 
             for (int i = 0; i < aTags.size(); i++) {
                 DataClass.getInstance().notifi.add(aTags.get(i).text());
+                DataClass.getInstance().link.add((aTags.get(i).attr("href")));
             }
 
         } catch(Exception e) {
