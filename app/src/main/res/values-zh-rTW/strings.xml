@@ -29,7 +29,7 @@
     <string name="subject">NTU APP</string>
     <string name="mail_body">我的問題是：\n我的手機型號是： \n我的 Android 版本是：\n其他：</string>
 
-    <string name="information">小幫助：</string>
+    <string name="information">小幫助</string>
     <string name="information_detail">可以直接點擊下列卡片開起撥號界面並撥號。</string>
     <string name="student_Safety_Division">總值日官室</string>
     <string name="campus_Security">校警隊</string>
