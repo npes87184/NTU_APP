@@ -44,5 +44,6 @@
     <string name="Student_Housing_Service_Division">Student Housing Service Division</string>
     <string name="Student_Activity_Division">Student Activity Division</string>
     <string name="Student_Counseling_Center">Student Counseling Center</string>
+    <string name="Detail">Detail</string>
 
 </resources>

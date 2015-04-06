@@ -1,6 +1,8 @@
 package com.npes87184.ntuapp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -15,7 +17,6 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
@@ -123,8 +124,15 @@ public class MainActivity extends ActionBarActivity
                     int day = Integer.parseInt(dayFormatter.format(date));
                     int mm = Integer.parseInt(MMFormatter.format(date));
                     if(!Calendars.getInstance().getEvents(mm, day).equals("0")) {
-                        Toast.makeText(getApplicationContext(), Calendars.getInstance().getEvents(mm, day),
-                                Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(MainActivity.this)
+                                .setTitle(getString(R.string.Detail))
+                                .setMessage(Calendars.getInstance().getEvents(mm, day))
+                                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                }).show();
                     }
                 }
             };
@@ -171,8 +179,15 @@ public class MainActivity extends ActionBarActivity
                     int day = Integer.parseInt(dayFormatter.format(date));
                     int mm = Integer.parseInt(MMFormatter.format(date));
                     if(!Nights.getInstance().getNights(mm, day).equals("0")) {
-                        Toast.makeText(getApplicationContext(), Nights.getInstance().getNights(mm, day),
-                                Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(MainActivity.this)
+                                .setTitle(getString(R.string.Detail))
+                                .setMessage( Nights.getInstance().getNights(mm, day))
+                                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                }).show();
                     }
                 }
             };
