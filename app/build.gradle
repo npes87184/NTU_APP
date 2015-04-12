@@ -25,4 +25,5 @@ dependencies {
     compile 'org.jsoup:jsoup:1.8.1'
     compile 'com.roomorama:caldroid:1.1.8'
     compile 'com.github.dexafree:materiallist:2.4.0'
+    compile 'com.daimajia.numberprogressbar:library:1.2@aar'
 }

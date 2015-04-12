@@ -4,9 +4,10 @@
     <string name="title_section1">主頁面</string>
     <string name="title_section2">新聞與公告</string>
     <string name="title_section3">行事曆</string>
-    <string name="title_section4">各系之夜</string>
-    <string name="title_section5">緊急聯絡</string>
-    <string name="title_section6">關於</string>
+    <string name="title_section4">活動</string>
+    <string name="title_section5">活動大聲說</string>
+    <string name="title_section6">緊急聯絡</string>
+    <string name="title_section7">關於</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

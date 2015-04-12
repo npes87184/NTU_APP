@@ -201,17 +201,26 @@ public class MainActivity extends ActionBarActivity
             t.replace(R.id.container, caldroidFragment);
             t.commit();
         } else if(4==position) {
-            //emergency
+            //share activity
             mTitle = getString(R.string.title_section5);
+            restoreActionBar();
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, ShareActivityFragment.newInstance(position + 1))
+                    .commit();
+        } else if(5==position) {
+            //emergency
+            mTitle = getString(R.string.title_section6);
             restoreActionBar();
 
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.container, EmergencyFragment.newInstance(position + 1))
                     .commit();
-        } else if(5==position) {
+        } else if(6==position) {
             //About
-            mTitle = getString(R.string.title_section6);
+            mTitle = getString(R.string.title_section7);
             restoreActionBar();
 
             FragmentManager fragmentManager = getSupportFragmentManager();

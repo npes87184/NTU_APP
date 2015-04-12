@@ -47,3 +47,4 @@ Thanks
 * Caldroid (roomorama)
 * Jsoup
 * MaterialList (dexafree)
+* NumberProgressBar (daimajia)

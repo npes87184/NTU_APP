@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +14,6 @@ import com.dexafree.materialList.controller.RecyclerItemClickListener;
 import com.dexafree.materialList.model.Card;
 import com.dexafree.materialList.model.CardItemView;
 import com.dexafree.materialList.view.MaterialListView;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by npes87184 on 2015/4/5.
