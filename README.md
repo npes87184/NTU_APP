@@ -48,7 +48,7 @@ Picture
 
 <img src="http://truth.bahamut.com.tw/s01/201504/54c87eb8cada9796768e4679a9abf548.PNG">
 
-<img src="http://truth.bahamut.com.tw/s01/201504/15318b53addcc857faaa0d204be96496.PNG">
+<img src="http://truth.bahamut.com.tw/s01/201504/4c9ea2a5e12467ba1221932f714713f9.PNG">
 
 Thanks
 ========
