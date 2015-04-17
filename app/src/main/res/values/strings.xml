@@ -46,5 +46,6 @@
     <string name="Student_Activity_Division">Student Activity Division</string>
     <string name="Student_Counseling_Center">Student Counseling Center</string>
     <string name="Detail">Detail</string>
+    <string name="no_internet">Do not have internet, the data maybe not up to date.</string>
 
 </resources>

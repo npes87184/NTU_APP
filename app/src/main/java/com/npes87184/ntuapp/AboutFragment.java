@@ -78,7 +78,7 @@ public class AboutFragment extends Fragment {
         mListView.add(claim);
 
         SmallImageCard library = new SmallImageCard(getActivity());
-        library.setDescription("Jsoup, Caldroid and Materiallist");
+        library.setDescription("Jsoup, Caldroid, Materiallist and NumberProgressBar");
         library.setTitle("Library");
         library.setTag("library");
         mListView.add(library);

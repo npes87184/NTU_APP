@@ -46,5 +46,6 @@
     <string name="Student_Activity_Division">課外活動組</string>
     <string name="Student_Counseling_Center">學生輔導中心</string>
     <string name="Detail">詳細細節</string>
+    <string name="no_internet">無網路連線，資料可能不是最新的。</string>
 
 </resources>

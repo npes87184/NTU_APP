@@ -2,8 +2,11 @@ package com.npes87184.ntuapp;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
@@ -20,6 +23,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
@@ -57,11 +61,16 @@ public class MainActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
-
-        new DataFetch().execute(DataType.Notification);
-
-        Nights.getInstance().init(this);
+        //in first execute need init
+        DataClass.getInstance();
         Calendars.getInstance().init(this);
+
+        ConnectivityManager CM = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = CM.getActiveNetworkInfo();
+        if((info != null) && info.isConnected()) {
+            new DataFetch().execute(DataType.Notification);
+            new DataFetch().execute(DataType.Activity);
+        }
     }
 
     @Override
@@ -78,6 +87,12 @@ public class MainActivity extends ActionBarActivity
         } else if(1==position) {
             mTitle = getString(R.string.title_section2);
             restoreActionBar();
+
+            ConnectivityManager CM = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo info = CM.getActiveNetworkInfo();
+            if(!((info != null) && info.isConnected())) {
+                Toast.makeText(this, R.string.no_internet, Toast.LENGTH_LONG).show();
+            }
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
@@ -151,6 +166,12 @@ public class MainActivity extends ActionBarActivity
             mTitle = getString(R.string.title_section4);
             restoreActionBar();
 
+            ConnectivityManager CM = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo info = CM.getActiveNetworkInfo();
+            if(!((info != null) && info.isConnected())) {
+                Toast.makeText(this, R.string.no_internet, Toast.LENGTH_LONG).show();
+            }
+
             CaldroidFragment caldroidFragment = new CaldroidFragment();
             Bundle args = new Bundle();
             Calendar cal = Calendar.getInstance();
@@ -164,7 +185,7 @@ public class MainActivity extends ActionBarActivity
             // let the date of night be red
             for(int mm=1;mm<13;mm++) {
                 for(int day=1;day<31;day++) {
-                    if(!Nights.getInstance().getNights(mm, day).equals("0")) {
+                    if(!DataClass.getInstance().events[mm][day].equals("0")) {
                         try {
                             String target = "2015 " + String.valueOf(mm) + " " + String.valueOf(day);
                             Date purpleDate = backgroundFormatter.parse(target);
@@ -181,10 +202,10 @@ public class MainActivity extends ActionBarActivity
                 public void onSelectDate(Date date, View view) {
                     int day = Integer.parseInt(dayFormatter.format(date));
                     int mm = Integer.parseInt(MMFormatter.format(date));
-                    if(!Nights.getInstance().getNights(mm, day).equals("0")) {
+                    if(!DataClass.getInstance().events[mm][day].equals("0")) {
                         new AlertDialog.Builder(MainActivity.this)
                                 .setTitle(getString(R.string.Detail))
-                                .setMessage( Nights.getInstance().getNights(mm, day))
+                                .setMessage(DataClass.getInstance().events[mm][day])
                                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -312,7 +333,7 @@ public class MainActivity extends ActionBarActivity
 
             rootView = inflater.inflate(R.layout.fragment_main, container, false);
             ListView listview = (ListView)rootView.findViewById(R.id.listView);
-            ArrayList<String> arr = new ArrayList<String>(3);
+            ArrayList<String> arr = new ArrayList<String>();
 
             for(int i=0;i<DataClass.getInstance().notifi.size();i++) {
                 arr.add(DataClass.getInstance().notifi.get(i));
@@ -332,8 +353,7 @@ public class MainActivity extends ActionBarActivity
                 }
              });
 
-
-                return rootView;
+             return rootView;
         }
 
         @Override

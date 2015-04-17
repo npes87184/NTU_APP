@@ -1,7 +1,5 @@
 package com.npes87184.ntuapp;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,12 +14,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.daimajia.numberprogressbar.NumberProgressBar;
-import com.dexafree.materialList.cards.SmallImageCard;
-import com.dexafree.materialList.controller.OnDismissCallback;
-import com.dexafree.materialList.controller.RecyclerItemClickListener;
-import com.dexafree.materialList.model.Card;
-import com.dexafree.materialList.model.CardItemView;
-import com.dexafree.materialList.view.MaterialListView;
 
 /**
  * Created by npes87184 on 2015/4/12.
@@ -90,7 +82,7 @@ public class ShareActivityFragment extends Fragment {
             }
         });
 
-        mWebView.loadUrl("https://www.google.com.tw/");
+        mWebView.loadUrl("https://ntu-activities.herokuapp.com/activities/new");
         return v;
     }
 

@@ -83,10 +83,10 @@ public class HomeFragment extends android.support.v4.app.Fragment {
         positive_energy.setTag(CardType.Positive_Energy);
         mListView.add(positive_energy);
 
-        if(!Nights.getInstance().getNights(mm, day).equals("0")) {
+        if(!DataClass.getInstance().events[mm][day].equals("0")) {
             SmallImageCard activity = new SmallImageCard(getActivity());
             activity.setDismissible(true);
-            activity.setDescription(Nights.getInstance().getNights(mm, day));
+            activity.setDescription(DataClass.getInstance().events[mm][day]);
             activity.setDrawable(R.drawable.run);
             activity.setTitle(getResources().getString(R.string.activity));
             activity.setTag(CardType.Activity);

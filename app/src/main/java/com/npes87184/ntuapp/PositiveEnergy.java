@@ -1,7 +1,6 @@
 package com.npes87184.ntuapp;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -34,7 +33,7 @@ public class PositiveEnergy {
             }
             abpath.close();
         } catch(Exception e) {
-            Log.i("error", "bye");
+
         }
     }
 
