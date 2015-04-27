@@ -7,10 +7,15 @@ calendar, nights and some emergency call.
 
 Latest Version
 ========
-1.1
+1.11
 
 Changelog
 ========
+###1.11
+* Remove nights.dat
+* Add Licence in about
+* Add 31 positive energy
+
 ###1.1
 * Add share activity
 * Now activity will sync with internet

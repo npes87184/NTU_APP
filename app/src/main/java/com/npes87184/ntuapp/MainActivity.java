@@ -162,7 +162,7 @@ public class MainActivity extends ActionBarActivity
             t.commit();
 
         } else if(3==position) {
-            //nights
+            //activity
             mTitle = getString(R.string.title_section4);
             restoreActionBar();
 

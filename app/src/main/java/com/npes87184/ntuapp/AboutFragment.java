@@ -1,5 +1,7 @@
 package com.npes87184.ntuapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.dexafree.materialList.cards.SmallImageCard;
 import com.dexafree.materialList.controller.OnDismissCallback;
@@ -55,12 +59,35 @@ public class AboutFragment extends Fragment {
 
             @Override
             public void onItemClick(CardItemView view, int position) {
-                if(view.getTag().toString().equals("contact")) {
+                if (view.getTag().toString().equals("contact")) {
                     Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                             "mailto", "npes87184@gmail.com", null));
                     emailIntent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.subject));
                     emailIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.mail_body));
                     startActivity(emailIntent);
+                } else if (view.getTag().toString().equals("library")) {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                    alert.setTitle("Licence");
+
+                    WebView wv = new WebView(getActivity());
+                    wv.loadUrl("file:///android_asset/licence.html");
+                    wv.setWebViewClient(new WebViewClient() {
+                        @Override
+                        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                            view.loadUrl(url);
+
+                            return true;
+                        }
+                    });
+
+                    alert.setView(wv);
+                    alert.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.dismiss();
+                        }
+                    });
+                    alert.show();
                 }
             }
 
